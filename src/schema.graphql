@@ -3,15 +3,53 @@ schema {
   mutation: Mutation
 }
 
-# You can document types by commenting above them
 type Query {
-  """
-  # Test Documentation
-  Use markdown for better documentation.
-  """
-  test: String!
+  food: [Food!]!
+  drink: [Drink!]!
+  search(name: String!): [Orderable!]!
 }
 
 type Mutation {
   updateTest(message: String!): String!
+}
+
+interface Orderable {
+  name: String!
+  description: String!
+  price: Float!
+}
+
+type Food implements Orderable {
+  name: String!
+  description: String!
+  price: Float!
+  ingredients: [Ingredient!]!
+}
+
+type Ingredient {
+  name: String!
+  restriction: DietaryRestriction
+  allergens: [DietaryContaminants!]
+}
+
+type Drink implements Orderable {
+  name: String!
+  price: Float!
+  description: String!
+  ingredients: [Ingredient!]!
+  ageRestriction: Boolean!
+}
+
+enum DietaryRestriction {
+  VEGAN
+  VEGETARIAN
+  PESCETARIAN
+}
+
+enum DietaryContaminants {
+  EGG
+  MILK
+  PEANUT
+  SOY
+  WHEAT
 }

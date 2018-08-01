@@ -15,11 +15,6 @@ const schema = makeExecutableSchema({
   resolverValidationOptions: {
     requireResolversForResolveType: false,
   },
-  // each key in this object represents a type that you can mock a generic resposne for
-  mocks: {
-    Query: () => ({}),
-    Mutation: () => ({}),
-  }
 });
 
 module.exports = schema
