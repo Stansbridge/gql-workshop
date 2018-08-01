@@ -1,0 +1,32 @@
+{
+  "name": "gql-workshop",
+  "version": "1.0.0",
+  "description": "GQL workshop",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon -e js,graphql ./src/server.js",
+    "start": "node ./src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Stansbridge/gql-workshop.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Stansbridge/gql-workshop/issues"
+  },
+  "homepage": "https://github.com/Stansbridge/gql-workshop#readme",
+  "dependencies": {
+    "apollo-server-express": "^2.0.0",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "graphql-playground-middleware-express": "^1.7.2",
+    "graphql-tools": "^3.0.5",
+    "graphql-voyager": "^1.0.0-rc.19"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.3"
+  }
+}
