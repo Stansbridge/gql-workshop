@@ -1,0 +1,17 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+# You can document types by commenting above them
+type Query {
+  """
+  # Test Documentation
+  Use markdown for better documentation.
+  """
+  test: String!
+}
+
+type Mutation {
+  updateTest(message: String!): String!
+}
