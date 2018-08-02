@@ -15,6 +15,20 @@ const schema = makeExecutableSchema({
   resolverValidationOptions: {
     requireResolversForResolveType: false,
   },
+  // we must help GraphQL resolve interfaces, to do this you simply need to branch against
+  // what makes each implementation of an interface different from another
+  resolvers: {
+    Orderable: {
+      __resolveType: (obj) => {
+        // in our case, a drink has an ageRestriction
+        if (obj.hasOwnProperty('ageRestriction')) {
+          return 'Drink';
+        } else {
+          return 'Food';
+        }
+      }
+    }
+  }
 });
 
 const ingredients = {
@@ -79,16 +93,25 @@ const drinks = {
 }
 
 addMockFunctionsToSchema({
+  // we want to keep our resolver map for our interface types
+  preserveResolvers: true,
   schema,
   // each key in this object represents a type that you can mock a generic resposne for
   mocks: {
     Query: () => {
+      // convert to array
+      const foodList = Object.keys(foods).map((key) => foods[key]);
+      const drinkList = Object.keys(drinks).map((key) => drinks[key]);
       return {
-        food: [foods.pizza],
-        drink: [drinks.beer, drinks.water, drinks.daiquiri],
+        food: foodList,
+        drink: drinkList,
         search: (_, { name }) => {
-          // search logic
-          return []
+          const orderables = [
+            ...foodList,
+            ...drinkList,
+          ]
+          // search logic here 
+          return orderables;
         }
       };
     },
